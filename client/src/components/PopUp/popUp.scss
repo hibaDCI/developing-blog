@@ -1,0 +1,23 @@
+.popup {
+  &-backdrop {
+    background-color: #0c0404;
+    opacity: 0.5;
+    width: 100vw;
+    position: absolute;
+    left: 0;
+    z-index: -10;
+
+    top: 0;
+    height: 100vh;
+  }
+  &-container {
+    margin: 2% auto;
+    display: flex;
+    flex-direction: column;
+    background-color: #fa5c40;
+    width: 40%;
+    height: 60%;
+    align-items: center;
+    justify-content: center;
+  }
+}
