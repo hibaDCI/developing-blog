@@ -1,11 +1,33 @@
 import React, {useState} from "react";
 import "./login.scss";
-function Login({onSubmit}) {
+import axios from "axios";
+
+import {useNavigate} from "react-router-dom";
+function Login() {
   const [password, setPassword] = useState("");
+
   const [email, setEmail] = useState("");
+
+  const navigate = useNavigate();
+  const onSubmitHandle = async () => {
+    console.log("hello");
+    await axios({
+      method: "POST",
+      url: "/users/login",
+      data: {password, email},
+    })
+      .then((res) => {
+        console.log(res, "res");
+        // navigate("/dashboard")
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    onSubmit(email, password);
+    onSubmitHandle();
   };
 
   return (
@@ -15,6 +37,7 @@ function Login({onSubmit}) {
         <input
           name="email"
           type="text"
+          placeholder="Email"
           value={email}
           className="login-input"
           onChange={(event) => setEmail(event.target.value)}
@@ -22,10 +45,12 @@ function Login({onSubmit}) {
         <input
           name="password"
           type="password"
+          placeholder="Password"
           className="login-input"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+
         <button type="submit">Login In</button>
       </form>
     </div>
